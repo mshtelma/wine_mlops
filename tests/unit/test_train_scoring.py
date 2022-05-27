@@ -7,10 +7,9 @@ import shutil
 import mlflow
 import yaml
 from pyspark.sql import SparkSession
-from unittest.mock import MagicMock
 
-from jobs.data_setup_entrypoint import DataPrepJob
-from jobs.scoring_entrypoint import ScoringJob
+from wine_classifier.jobs.data_setup_entrypoint import DataPrepJob
+from wine_classifier.jobs.scoring_entrypoint import ScoringJob
 from wine_classifier.jobs.train_entrypoint import TrainJob
 
 
