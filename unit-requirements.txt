@@ -1,0 +1,11 @@
+setuptools
+wheel
+pyspark==3.1.2
+PyArrow >= 1.0.0
+pyyaml
+pytest
+pytest-cov
+dbx
+matplotlib
+scikit-learn==1.1.1
+xgboost

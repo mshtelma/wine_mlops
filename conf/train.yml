@@ -1,0 +1,10 @@
+experiment: /Shared/DBXWineClassifier
+random_state: 41
+labels:
+  - red
+  - white
+model_name: WineClassifier
+model_parameters:
+  n_estimators: 100
+
+
