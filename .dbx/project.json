@@ -3,7 +3,7 @@
         "default": {
             "profile": "e2fieldeng",
             "workspace_dir": "/Shared/dbx/wine_classifier",
-            "artifact_location": "dbfs:/Shared/dbx/projects/wine_classifier"
+            "artifact_location": "dbfs:/Users/msh/dbx/projects/wine_classifier"
         }
     }
 }
