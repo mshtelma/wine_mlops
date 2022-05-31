@@ -30,9 +30,21 @@ environments:
         spark_python_task:
           python_file: "file://wine_classifier/jobs/scoring_entrypoint.py"
           parameters: [ "--conf-file", "file:fuse://conf/scoring.yml" ]
+      - name: "wine-classifier-model-eval-stage"
+        <<:
+          - *basic-static-cluster
+        spark_python_task:
+          python_file: "file://wine_classifier/jobs/model_eval_entrypoint.py"
+          parameters: [ "--conf-file", "file:fuse://conf/model_eval_stage.yml" ]
+      - name: "wine-classifier-model-eval-prod"
+        <<:
+          - *basic-static-cluster
+        spark_python_task:
+          python_file: "file://wine_classifier/jobs/model_eval_entrypoint.py"
+          parameters: [ "--conf-file", "file:fuse://conf/model_eval_prod.yml" ]
       - name: "wine-classifier-integration-test"
         <<:
           - *basic-static-cluster
         spark_python_task:
-          python_file: "file://tests/integration/sample_test.py"
-          parameters: ["--conf-file", "file:fuse://conf/train.yml"]
+          python_file: "file://tests/integration/train_eval_score_integration_test.py"
+          parameters: ["--conf-file", "file:fuse://conf/int_test.yml"]

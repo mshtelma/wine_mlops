@@ -1,5 +1,6 @@
 experiment: /Shared/DBXWineClassifier
 model_name: WineClassifier
 stage: Production
+dataset: wine_scoring
 
 

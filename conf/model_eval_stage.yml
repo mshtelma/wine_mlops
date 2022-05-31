@@ -1,0 +1,10 @@
+experiment: /Shared/DBXWineClassifier
+random_state: 41
+dataset: wine_eval
+model_name: WineClassifier
+deploy_to_sagemaker: true
+compare_models: true
+from_stage: None
+to_stage: Staging
+
+

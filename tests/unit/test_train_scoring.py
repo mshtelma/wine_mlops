@@ -8,6 +8,7 @@ import mlflow
 import yaml
 from pyspark.sql import SparkSession
 
+from jobs.model_eval_entrypoint import ModelEvalJob
 from wine_classifier.jobs.data_setup_entrypoint import DataPrepJob
 from wine_classifier.jobs.scoring_entrypoint import ScoringJob
 from wine_classifier.jobs.train_entrypoint import TrainJob
@@ -26,20 +27,26 @@ class SampleJobUnitTest(unittest.TestCase):
         self.spark = SparkSession.builder.master("local[1]").getOrCreate()
         self.train_conf = yaml.safe_load(pathlib.Path("conf/train.yml").read_text())
         self.scoring_conf = yaml.safe_load(pathlib.Path("conf/scoring.yml").read_text())
+        self.model_eval_conf = yaml.safe_load(
+            pathlib.Path("conf/model_eval_stage.yml").read_text()
+        )
         df = DataPrepJob.load_wine_dataset()
-        self.spark.createDataFrame(df).createTempView("wine_train")
+        self.spark.createDataFrame(df).createTempView("wine_training")
+        self.spark.createDataFrame(df).createTempView("wine_eval")
         self.spark.createDataFrame(df).drop("is_red").createTempView("wine_scoring")
-        self.train_conf['experiment'] = "test_exp"
-        self.scoring_conf['experiment'] = "test_exp"
-        self.scoring_conf['stage']='None'
+        self.train_conf["experiment"] = "test_exp"
+        self.scoring_conf["experiment"] = "test_exp"
+        self.scoring_conf["stage"] = "Staging"
         self.train_job = TrainJob(spark=self.spark, init_conf=self.train_conf)
         self.scoring_job = ScoringJob(spark=self.spark, init_conf=self.scoring_conf)
+        self.model_eval_job = ModelEvalJob(
+            spark=self.spark, init_conf=self.model_eval_conf
+        )
 
     def test_sample(self):
         self.train_job.launch()
+        self.model_eval_job.launch()
         self.scoring_job.launch()
-
-
 
 
 if __name__ == "__main__":

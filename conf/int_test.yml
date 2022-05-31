@@ -8,4 +8,9 @@ model_name: WineClassifier
 model_parameters:
   n_estimators: 100
 
+deploy_to_sagemaker: false
+compare_models: true
+from_stage: None
+to_stage: Production
 
+stage: Production
