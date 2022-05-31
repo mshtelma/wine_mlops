@@ -10,7 +10,7 @@ class DataPrepJob(Job):
 
         sdf = self.spark.createDataFrame(DataPrepJob.load_wine_dataset())
         train_sdf, test_sdf = sdf.randomSplit([0.8, 0.2])
-        train_sdf.write.format("delta").mode("overwrite").saveAsTable("wine_traning")
+        train_sdf.write.format("delta").mode("overwrite").saveAsTable("wine_training")
         train_sdf.write.format("delta").mode("overwrite").saveAsTable("wine_eval")
         test_sdf.drop("is_red").write.format("delta").mode("overwrite").saveAsTable(
             "wine_scoring"
