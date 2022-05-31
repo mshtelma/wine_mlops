@@ -8,7 +8,7 @@ import mlflow
 import yaml
 from pyspark.sql import SparkSession
 
-from jobs.model_eval_entrypoint import ModelEvalJob
+from wine_classifier.jobs.model_eval_entrypoint import ModelEvalJob
 from wine_classifier.jobs.data_setup_entrypoint import DataPrepJob
 from wine_classifier.jobs.scoring_entrypoint import ScoringJob
 from wine_classifier.jobs.train_entrypoint import TrainJob

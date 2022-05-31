@@ -9,7 +9,7 @@ from wine_classifier.jobs.scoring_entrypoint import ScoringJob
 from wine_classifier.jobs.train_entrypoint import TrainJob
 
 
-class SampleJobIntegrationTest(unittest.TestCase):
+class TrainEvalScoreIntegrationTest(unittest.TestCase):
     def setUp(self):
 
         self.dataprep_job = DataPrepJob()
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # it's intentionally done in this way to comply with jobs run result checks
     # for other tests, please simply replace the SampleJobIntegrationTest with your custom class name
     loader = unittest.TestLoader()
-    tests = loader.loadTestsFromTestCase(SampleJobIntegrationTest)
+    tests = loader.loadTestsFromTestCase(TrainEvalScoreIntegrationTest)
     runner = unittest.TextTestRunner(verbosity=2)
     result = runner.run(tests)
     if not result.wasSuccessful():
