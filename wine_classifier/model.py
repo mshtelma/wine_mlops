@@ -10,6 +10,7 @@ from mlflow.models import infer_signature
 from mlflow.tracking import MlflowClient
 from pyspark.sql import SparkSession
 
+from .deploy import deploy_to_sagemaker
 from .dataset import DataLoader
 
 logging.basicConfig(
@@ -144,6 +145,16 @@ def deploy_model(conf: Dict[str, Any], model_version: ModelVersion) -> None:
         stage=conf["to_stage"],
         archive_existing_versions=True,
     )
+    if conf.get("deploy_to_sagemaker", False):
+        try:
+            deploy_to_sagemaker(
+                conf["sagemaker_endpoint_name"],
+                conf["sagemaker_image_url"],
+                f"models:/{model_version.name}/{model_version.version}",
+                conf["sagemaker_region"],
+            )
+        except Exception as e:
+            print("Error has occured while deploying the model to SageMaker: ", e)
 
 
 def get_latest_model_for_stage(model_name: str, stage: str) -> Optional[ModelVersion]:

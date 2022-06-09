@@ -1,3 +1,4 @@
+import logging
 from abc import ABC, abstractmethod
 from argparse import ArgumentParser
 from logging import Logger
@@ -7,6 +8,8 @@ import pathlib
 from pyspark.sql import SparkSession
 import sys
 
+logging.basicConfig()
+logging.getLogger().setLevel(logging.CRITICAL)
 
 # abstract class for jobs
 class Job(ABC):

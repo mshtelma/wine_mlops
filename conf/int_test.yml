@@ -1,10 +1,10 @@
-experiment: /Shared/DBXWineClassifier
+experiment: /Shared/DBXWineClassifierIntTest
 random_state: 41
 dataset: wine_training
 labels:
   - red
   - white
-model_name: WineClassifier
+model_name: WineClassifierIntTest
 model_parameters:
   n_estimators: 100
 

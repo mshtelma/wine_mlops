@@ -9,6 +9,6 @@ def deploy_to_sagemaker(
         app_name=endpoint_name,
         model_uri=model_uri,
         region_name=region_name,
-        mode=mlflow.sagemaker.DEPLOYMENT_MODE_ADD,  # "replace",
+        mode=mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE,
         image_url=image_url,
     )
